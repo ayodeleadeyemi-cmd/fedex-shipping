@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#4b148c">
+  <meta name="description" content="Track deliveries, request package holds or returns, and manage shipments with FedEx Shipping.">
+  <title>FedEx — Every delivery, handled with care</title>
+  <link rel="preload" as="image" href="assets/edge-hero.webp">
+  <link id="appFavicon" rel="icon" href="assets/edge-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div id="serverModeNotice" class="server-mode-notice" role="status" aria-live="polite" hidden></div>
+  <div class="announcement">
+    <div class="container announcement-inner">
+      <span><span class="announcement-dot"></span> Clear updates. Smarter delivery.</span>
+      <button class="text-link announcement-link" data-page="support">Need a hand? Visit support <span aria-hidden="true">↗</span></button>
+    </div>
+  </div>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="#home" data-page="home" aria-label="FedEx Shipping home">
+        <!-- <img data-edge-logo src="assets/edge-mark.svg" alt="FedEx Shipping logo" width="42" height="42"> -->
+        <span class="brand-wordmark">Fed<span>Ex.</span></span>
+      </a>
+      <button class="mobile-menu-button" id="mobileMenuButton" aria-expanded="false" aria-controls="mainNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+      <nav id="mainNav" class="main-nav" aria-label="Main navigation">
+        <div class="nav-menu-group" data-nav-group="shipping">
+          <button class="nav-link" type="button" data-page="ship" data-menu-toggle="shipping" aria-expanded="false" aria-controls="shippingMenu">Shipping <span class="nav-chevron" aria-hidden="true">⌄</span></button>
+          <div class="nav-dropdown" id="shippingMenu" data-nav-menu="shipping">
+            <span class="nav-dropdown-eyebrow">SHIPPING</span>
+            <button class="nav-dropdown-item" data-page="ship"><b>Rate &amp; transit times</b><small>Estimate a domestic U.S. shipment.</small><span>→</span></button>
+            <button class="nav-dropdown-item" data-page="services"><b>Shipping services</b><small>Compare Edge Ground, Priority and Express.</small><span>→</span></button>
+            <button class="nav-dropdown-item" data-page="manage"><b>Hold or return a package</b><small>Request a delivery change.</small><span>→</span></button>
+          </div>
+        </div>
+        <div class="nav-menu-group" data-nav-group="tracking">
+          <button class="nav-link" type="button" data-page="track" data-menu-toggle="tracking" aria-expanded="false" aria-controls="trackingMenu">Tracking <span class="nav-chevron" aria-hidden="true">⌄</span></button>
+          <div class="nav-dropdown" id="trackingMenu" data-nav-menu="tracking">
+            <span class="nav-dropdown-eyebrow">TRACKING</span>
+            <button class="nav-dropdown-item" data-page="track"><b>Track a package</b><small>View status, location and shipment history.</small><span>→</span></button>
+            <button class="nav-dropdown-item" data-page="manage"><b>Manage a delivery</b><small>Request a hold or return to sender.</small><span>→</span></button>
+            <button class="nav-dropdown-item" data-track-sample="EDG-US-DEMO001"><b>View tracking</b><small>Explore a shipment timeline.</small><span>→</span></button>
+          </div>
+        </div>
+        <div class="nav-menu-group" data-nav-group="support">
+          <button class="nav-link" type="button" data-page="support" data-menu-toggle="support" aria-expanded="false" aria-controls="supportMenu">Support <span class="nav-chevron" aria-hidden="true">⌄</span></button>
+          <div class="nav-dropdown" id="supportMenu" data-nav-menu="support">
+            <span class="nav-dropdown-eyebrow">SUPPORT</span>
+            <button class="nav-dropdown-item" data-page="support"><b>Help center &amp; FAQs</b><small>Get answers about FedEx shipments.</small><span>→</span></button>
+            <button class="nav-dropdown-item" data-page="manage"><b>Shipment request</b><small>Send a hold or return request.</small><span>→</span></button>
+            <button class="nav-dropdown-item" data-page="track"><b>Tracking help</b><small>Look up a tracking ID.</small><span>→</span></button>
+          </div>
+        </div>
+        <div class="nav-menu-group" data-nav-group="account">
+          <button class="nav-link" type="button" data-page="admin" data-menu-toggle="account" aria-expanded="false" aria-controls="accountMenu">Account <span class="nav-chevron" aria-hidden="true">⌄</span></button>
+          <div class="nav-dropdown nav-dropdown-right" id="accountMenu" data-nav-menu="account">
+            <span class="nav-dropdown-eyebrow">ACCOUNT &amp; OPERATIONS</span>
+            <button class="nav-dropdown-item" data-page="admin"><b>Administrator sign in</b><small>Manage shipments, requests and the FedEx logo.</small><span>→</span></button>
+            <button class="nav-dropdown-item" data-page="ship"><b>Request a quote</b><small>Send shipment details to operations.</small><span>→</span></button>
+          </div>
+        </div>
+      </nav>
+      <div class="nav-actions">
+        <button class="nav-signin" data-page="admin"><span class="user-icon" aria-hidden="true">♙</span><span class="signin-text">Admin Sign In</span></button>
+        <button class="header-search-button" id="headerSearchButton" type="button" aria-label="Open tracking search" title="Track a shipment"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 5 5"></path></svg></button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HOME -->
+    <section class="page active" id="page-home" data-page-view="home">
+      <div class="hero-shell">
+        <div class="container hero-dashboard">
+          <div class="hero-welcome">
+            <h1>Welcome to <span>FedEx Shipping</span></h1>
+            <p>Domestic shipping and tracking across all 50 U.S. states.</p>
+          </div>
+          <div class="hero-service-tabs" role="group" aria-label="Popular shipping actions">
+            <button class="hero-service-tab" type="button" data-page="ship">
+              <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M5 15 24 5l19 10-19 10Z M5 15v21l19 9V25 M43 15v21l-19 9 M24 25v20 M14 10l19 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 31h9m-9 4h7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+              <span>RATE &amp;<br>TRANSIT TIMES</span>
+            </button>
+            <button class="hero-service-tab active" type="button" data-page="track" aria-current="page">
+              <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M5 15 24 5l19 10-19 10Z M5 15v21l19 9V25 M43 15v11 M24 25v20 M14 10l19 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="34" cy="32" r="8" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m40 38 5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              <span>TRACK</span>
+            </button>
+            <button class="hero-service-tab" type="button" data-page="ship">
+              <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M5 15 24 5l19 10-19 10Z M5 15v21l19 9V25 M43 15v21l-19 9 M24 25v20 M14 10l19 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+              <span>SHIP</span>
+            </button>
+          </div>
+        </div>
+        <div class="container tracking-bar-wrap">
+          <form class="tracking-bar" id="homeTrackForm">
+            <div class="tracking-icon"><span aria-hidden="true">⌕</span></div>
+            <label class="tracking-input-wrap" for="homeTrackingInput"><span class="field-caption">TRACKING ID</span><input id="homeTrackingInput" name="trackingId" placeholder="Enter your FedEx tracking ID" autocomplete="off" required></label>
+            <button class="button button-dark" type="submit">TRACK <span aria-hidden="true">→</span></button>
+          </form>
+          <div class="tracking-hint">Try a : <button class="inline-link" data-track-sample="FED-US-FEDO621">FED-US-FEDO621</button> <span class="FedEx-note">(FedEx shipment)</span></div>
+        </div>
+      </div>
+
+      <section class="account-promo-section" aria-label="Business shipping support">
+        <div class="account-promo-copy"><div class="account-promo-symbol" aria-hidden="true">↗</div><div><h2>Shipping for your business?</h2><p>Talk with the FedEx Shipping team about routes, service options and delivery support.</p></div></div>
+        <div class="account-promo-action"><button class="button button-outline-purple" data-page="support">CONTACT FedEx SHIPPING <span aria-hidden="true">→</span></button></div>
+      </section>
+
+      <section class="section-section quick-tools-section">
+        <div class="container">
+          <div class="section-heading split-heading"><div><div class="eyebrow eyebrow-muted">SHIPMENT MANAGEMENT</div><h2>Manage your shipments.</h2></div><p>Track a delivery, request a shipping estimate, make a delivery request, or get help—all from one place.</p></div>
+          <div class="quick-tools-grid">
+            <button class="quick-tool" data-page="track"><span class="tool-icon icon-orange">↗</span><span class="quick-title">Track a package</span><span class="quick-description">Follow shipment progress and recent scans.</span><span class="tool-arrow">→</span></button>
+            <button class="quick-tool" data-page="ship"><span class="tool-icon icon-blue">⌁</span><span class="quick-title">Get a shipping estimate</span><span class="quick-description">Plan your next delivery with a quick quote.</span><span class="tool-arrow">→</span></button>
+            <button class="quick-tool" data-page="manage"><span class="tool-icon icon-sand">▣</span><span class="quick-title">Hold or return a package</span><span class="quick-description">Send a request for our operations team to review.</span><span class="tool-arrow">→</span></button>
+            <button class="quick-tool" data-page="support"><span class="tool-icon icon-green">♡</span><span class="quick-title">Get support</span><span class="quick-description">Find answers about your FedEx shipment.</span><span class="tool-arrow">→</span></button>
+          </div>
+        </div>
+      </section>
+      <section class="services-band">
+        <div class="container services-band-grid">
+          <div class="services-band-copy"><div class="eyebrow eyebrow-light">FedEx SHIPPING SERVICES</div><h2>One place for every<br>kind of delivery.</h2><p>Compare service options, request a quote and follow the journey with clear milestone updates for shipments across the United States.</p><button class="button button-light" data-page="services">Explore our services <span aria-hidden="true">→</span></button></div>
+          <div class="service-feature-card"><div class="feature-top"><span class="feature-tag">01 / EVERYDAY</span><span class="feature-icon">↗</span></div><div class="feature-illustration illustration-box"><span class="box-top"></span><span class="box-front"></span><span class="box-side"></span></div><h3>FedEx Ground</h3><p>Dependable delivery for the parcels that keep life and business moving.</p><button class="subtle-link" data-page="ship" data-select-service="FedEx Ground">Plan a shipment <span aria-hidden="true">→</span></button></div>
+          <div class="service-feature-card feature-card-warm"><div class="feature-top"><span class="feature-tag">02 / TIME-SENSITIVE</span><span class="feature-icon">↗</span></div><div class="feature-illustration illustration-fast"><span class="fast-ring"></span><span class="fast-arrow">➜</span></div><h3>FedEx Priority</h3><p>For shipments where the timeline matters and updates matter even more.</p><button class="subtle-link" data-page="ship" data-select-service="FedEx Priority">Compare options <span aria-hidden="true">→</span></button></div>
+        </div>
+      </section>
+      <section class="section-section network-section">
+        <div class="container network-grid"><div><div class="eyebrow eyebrow-muted">TRACKING YOU CAN FOLLOW</div><h2>Know where things stand.<br><em>Without the guesswork.</em></h2><p class="section-lede">Your tracking page brings shipment details, status updates and service requests together—so you can spend less time wondering and more time moving forward.</p><button class="button button-primary" data-page="track">Track a shipment <span aria-hidden="true">→</span></button><p class="microcopy">Status updates are entered by FedEx Shipping operations. This starter system does not connect to live carrier GPS networks.</p></div>
+          <div class="network-card"><div class="network-card-head"><div><span class="tiny-label">NETWORK PREVIEW</span><h3>One connected journey</h3></div><span class="status-pill status-in-transit"><span></span> In transit</span></div><div class="network-map"><div class="map-grid-lines"></div><svg viewBox="0 0 520 270" aria-label="Illustrative delivery route across a U.S. network" role="img"><path class="us-outline" d="M44 61 75 39 108 52 138 39 168 48 195 41 225 56 248 48 272 61 300 50 324 64 358 55 386 68 419 69 446 87 463 107 448 123 435 148 418 169 406 184 380 189 360 207 333 205 308 218 286 202 260 214 239 200 214 209 195 191 174 191 155 176 134 183 112 164 92 162 82 143 59 132 53 107Z"/><path class="map-route" d="M104 146 Q170 68 232 138 T372 155 T429 104"/><circle class="map-pin pin-a" cx="104" cy="146" r="6"/><circle class="map-pin pin-b" cx="232" cy="138" r="6"/><circle class="map-pin pin-c" cx="372" cy="155" r="6"/><circle class="map-pin pin-d" cx="429" cy="104" r="6"/><text x="78" y="169">LOS ANGELES</text><text x="203" y="121">DENVER</text><text x="349" y="179">MEMPHIS</text><text x="409" y="86">ATLANTA</text></svg></div><div class="network-card-foot"><div class="foot-point"><span class="point-dot point-orange"></span><span><b>Origin</b><small>First scan</small></span></div><div class="route-dashes"></div><div class="foot-point"><span class="point-dot point-blue"></span><span><b>Destination</b><small>Delivery updates</small></span></div></div></div>
+        </div>
+      </section>
+      <section class="cta-section"><div class="container cta-inner"><div><div class="eyebrow eyebrow-light">LET'S GET IT MOVING</div><h2>Your next shipment starts here.</h2><p>Get an estimate or check the status of a package in just a few clicks.</p></div><div class="cta-actions"><button class="button button-white" data-page="ship">Get a quote <span aria-hidden="true">→</span></button><button class="button button-outline-light" data-page="track">Track a package</button></div></div></section>
+    </section>
+
+    <!-- TRACK -->
+    <section class="page" id="page-track" data-page-view="track">
+      <div class="page-banner"><div class="container page-banner-grid"><div><div class="eyebrow eyebrow-muted">TRACK & TRACE</div><h1>Every update,<br><em>in one place.</em></h1><p>Enter your FedEx tracking ID to view the latest status, location and tracking history available in our system.</p></div><div class="banner-icon banner-icon-track"><span>⌕</span><i></i><i></i></div></div></div>
+      <div class="container page-body"><div class="form-card track-form-card"><form id="trackPageForm" class="inline-track-form"><label for="trackPageInput"><span class="field-caption">TRACKING ID</span><input id="trackPageInput" name="trackingId" placeholder="e.g. FED-US-AB12CD34EF" required></label><button class="button button-primary" type="submit">Track shipment <span>→</span></button></form><div class="field-help"><button type="button" class="inline-link" data-track-sample="FED-US-FEDO621">Use tracking ID</button></div></div><div id="trackResult" class="track-result" aria-live="polite"></div><div class="reassurance-row"><div><span class="reassurance-icon">✓</span><span><b>Clear shipment history</b><small>See previous status updates in order.</small></span></div><div><span class="reassurance-icon">⌂</span><span><b>U.S. shipment support</b><small>Track operational updates across U.S. locations.</small></span></div><div><span class="reassurance-icon">↗</span><span><b>Request a change</b><small>Ask the team about holds and returns.</small></span></div></div></div>
+    </section>
+
+    <!-- SHIP -->
+    <section class="page" id="page-ship" data-page-view="ship">
+      <div class="page-banner"><div class="container page-banner-grid"><div><div class="eyebrow eyebrow-muted">SHIP WITH FedEx</div><h1>Good things are<br><em>on their way.</em></h1><p>Ship between any of the 50 U.S. states. Enter both ZIP codes to estimate a domestic route and request a follow-up from our team.</p></div><div class="banner-icon banner-icon-ship"><span>▣</span><b>FedEx</b></div></div></div>
+      <div class="container page-body ship-page-grid"><div class="form-card form-card-large"><div class="card-heading"><span class="step-number">01</span><div><h2>Plan your shipment</h2><p>Provide the route and package details to estimate a service.</p></div></div><form id="quoteForm" class="form-grid">
+        <label class="field"><span class="field-caption">ORIGIN CITY *</span><input name="originCity" placeholder="e.g. Dallas" autocomplete="address-level2" required></label>
+        <label class="field"><span class="field-caption">ORIGIN STATE *</span><select name="originState" data-us-state required><option value="">Select a state</option></select></label>
+        <label class="field"><span class="field-caption">ORIGIN ZIP CODE *</span><input name="originZip" placeholder="e.g. 75201" inputmode="numeric" autocomplete="postal-code" pattern="[0-9]{5}(-[0-9]{4})?" title="Enter a 5-digit ZIP code or ZIP+4" maxlength="10" required></label>
+        <label class="field"><span class="field-caption">DESTINATION CITY *</span><input name="destinationCity" placeholder="e.g. Atlanta" autocomplete="address-level2" required></label>
+        <label class="field"><span class="field-caption">DESTINATION STATE *</span><select name="destinationState" data-us-state required><option value="">Select a state</option></select></label>
+        <label class="field"><span class="field-caption">DESTINATION ZIP CODE *</span><input name="destinationZip" placeholder="e.g. 30303" inputmode="numeric" autocomplete="postal-code" pattern="[0-9]{5}(-[0-9]{4})?" title="Enter a 5-digit ZIP code or ZIP+4" maxlength="10" required></label>
+        <label class="field"><span class="field-caption">PACKAGE WEIGHT (LB)</span><input name="weight" type="number" min="0.1" max="5000" step="0.1" value="2" required></label>
+        <label class="field"><span class="field-caption">SERVICE</span><select name="service"><option>FedEx Ground</option><option>FedEx Priority</option><option>FedEx Express</option></select></label>
+        <label class="field"><span class="field-caption">YOUR NAME</span><input name="name" autocomplete="name" required></label>
+        <label class="field"><span class="field-caption">EMAIL ADDRESS</span><input name="email" type="email" autocomplete="email" required></label>
+        <div class="field-full form-submit-row"><button class="button button-primary" type="submit">Calculate estimate <span>→</span></button><span class="microcopy">Payment is taken on this page.</span></div>
+      </form><div id="quoteResult" class="quote-result" aria-live="polite"></div></div>
+        <aside class="ship-aside"><div class="aside-heading"><span class="aside-sun">✳</span><span class="tiny-label">BUILT AROUND YOUR ROUTE</span></div><h3>Options.<br>Clear next steps.</h3><p>This tool provides a planning estimate only. Your final quote may change after package dimensions, pickup details and service availability are confirmed.</p><div class="aside-service-list"><div><span class="aside-check">✓</span><span><b>Ground</b><small>Everyday parcels</small></span><span class="aside-time">Value</span></div><div><span class="aside-check">✓</span><span><b>Priority</b><small>Time-sensitive deliveries</small></span><span class="aside-time">Faster</span></div><div><span class="aside-check">✓</span><span><b>Express</b><small>Urgent shipment planning</small></span><span class="aside-time">Urgent</span></div></div><p class="microcopy">Estimates are Real and are carrier rates or a booking confirmation.</p></aside>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="page" id="page-services" data-page-view="services">
+      <div class="page-banner"><div class="container page-banner-grid"><div><div class="eyebrow eyebrow-muted">OUR SERVICES</div><h1>Move at your<br><em>own pace.</em></h1><p>Explore domestic shipping options for routes between all 50 U.S. states. Availability and final pricing are confirmed by the Edge Shipping team.</p></div><div class="banner-icon banner-icon-services"><span>↗</span><i class="service-orbit"></i></div></div></div>
+      <div class="container page-body"><div class="service-catalog-grid">
+        <article class="service-catalog-card"><div class="catalog-number">01 / EVERYDAY</div><div class="catalog-art art-ground"><div class="catalog-box"></div><div class="catalog-shadow"></div></div><h2>FedEx Ground</h2><p>A reliable option for non-urgent packages, business supplies and everyday deliveries.</p><ul><li>Shipment status history</li><li>Routes across all 50 U.S. states</li><li>Hold request review</li></ul><button class="text-arrow" data-page="ship" data-select-service="FedEx Ground">Estimate a shipment <span>→</span></button></article>
+        <article class="service-catalog-card catalog-highlight"><div class="catalog-number">02 / PRIORITY</div><div class="catalog-art art-priority"><div class="priority-lines"></div><div class="priority-box">E</div></div><h2>FedEx Priority</h2><p>For packages that need a closer eye on timing, supported by clear tracking updates.</p><ul><li>Priority handling workflow</li><li>Milestone-based tracking</li><li>Support request pathway</li></ul><button class="text-arrow" data-page="ship" data-select-service="FedEx Priority">Estimate a shipment <span>→</span></button></article>
+        <article class="service-catalog-card"><div class="catalog-number">03 / URGENT</div><div class="catalog-art art-express"><div class="express-circle">→</div><div class="express-label">EXPRESS</div></div><h2>FedEx Express</h2><p>A service option for time-sensitive shipping needs, subject to route availability.</p><ul><li>Urgent delivery planning</li><li>Route and weight estimate</li><li>Operations team follow-up</li></ul><button class="text-arrow" data-page="ship" data-select-service="FedEx Express">Estimate a shipment <span>→</span></button></article>
+      </div><div class="service-note"><span class="note-icon">i</span><p><b>Please note:</b> FedEx Shipping is an independent shipping website starter. Carrier integrations, live GPS, address validation, payments and guaranteed transit times are not enabled in this version.</p></div></div>
+    </section>
+
+    <!-- HOLD / RETURNS -->
+    <section class="page" id="page-manage" data-page-view="manage">
+      <div class="page-banner"><div class="container page-banner-grid"><div><div class="eyebrow eyebrow-muted">DELIVERY MANAGEMENT</div><h1>Plans change.<br><em>Your delivery can, too.</em></h1><p>Send a request to hold a package or return it to the sender. Our operations team reviews each request before changing shipment status.</p></div><div class="banner-icon banner-icon-manage"><span>↶</span><b>MANAGE</b></div></div></div>
+      <div class="container page-body manage-grid"><div class="form-card form-card-large"><div class="manage-choice" role="group" aria-label="Request type"><button class="manage-choice-button selected" type="button" data-request-type="hold"><span class="manage-choice-icon">Ⅱ</span><span><b>Hold a package</b><small>Ask to pause delivery at a facility.</small></span><span class="radio-dot"></span></button><button class="manage-choice-button" type="button" data-request-type="return"><span class="manage-choice-icon">↶</span><span><b>Return to sender</b><small>Ask to route an eligible parcel back.</small></span><span class="radio-dot"></span></button></div><form id="manageForm" class="form-grid">
+        <input type="hidden" name="type" id="requestType" value="hold">
+        <label class="field field-full"><span class="field-caption">TRACKING ID</span><input name="trackingId" placeholder="Enter the package tracking ID" required></label>
+        <label class="field"><span class="field-caption">YOUR NAME</span><input name="name" autocomplete="name" required></label>
+        <label class="field"><span class="field-caption">EMAIL ADDRESS</span><input name="email" type="email" autocomplete="email" required></label>
+        <label class="field field-full"><span class="field-caption">HOW CAN WE HELP?</span><textarea name="reason" rows="4" placeholder="Share why you need this change and any relevant details." required></textarea></label>
+        <div class="field-full form-submit-row"><button class="button button-primary" type="submit">Submit request <span>→</span></button><span class="microcopy">Submission is an approval.</span></div>
+      </form><div id="manageResult" class="quote-result" aria-live="polite"></div></div>
+        <aside class="manage-aside"><span class="tiny-label">WHAT HAPPENS NEXT?</span><div class="process-steps"><div class="process-step"><span>01</span><div><b>Request received</b><p>We record the request against your tracking ID.</p></div></div><div class="process-step"><span>02</span><div><b>Operations review</b><p>An administrator checks the request and shipment status.</p></div></div><div class="process-step"><span>03</span><div><b>Tracking updated</b><p>If approved, a new status event appears on the tracking page.</p></div></div></div><div class="support-callout"><span>Need help sooner?</span><p>Visit the support section with your tracking ID and request details.</p><button class="text-arrow" data-page="support">Open support <span>→</span></button></div></aside>
+      </div>
+    </section>
+
+    <!-- SUPPORT -->
+    <section class="page" id="page-support" data-page-view="support">
+      <div class="page-banner"><div class="container page-banner-grid"><div><div class="eyebrow eyebrow-muted">HERE TO HELP</div><h1>Let's get you<br><em>moving again.</em></h1><p>Start with these quick answers or use your tracking ID when contacting your FedEx Shipping administrator.</p></div><div class="banner-icon banner-icon-support"><span>♡</span><i></i></div></div></div>
+      <div class="container page-body support-grid"><div><div class="eyebrow eyebrow-muted">POPULAR QUESTIONS</div><h2 class="support-heading">Good to know.</h2><div class="faq-list">
+        <details><summary>Why hasn't my tracking status changed?</summary><p>Status updates appear when an administrator records a scan or shipment event. This starter receive live carrier or GPS updates, so a quiet timeline Which means the package has physically stopped moving.</p></details>
+        <details><summary>Can I request a hold or a return?</summary><p>Yes. Open Hold & returns and submit your tracking ID, contact details and reason. The request stays pending until an administrator reviews it.</p></details>
+        <details><summary>Does submitting a hold mean the package is held?</summary><p>No. A request is not automatically approved. The shipment status changes only after an administrator approves the request.</p></details>
+        <details><summary>Are the tracking numbers real shipments?</summary><p>Yes. IDs starting with FED-US-FEDO621 are records included. Create your own shipments through the Website area to generate new tracking IDs.</p></details>
+        <details><summary>Does this website book or pay for shipping?</summary><p>Yes. Quote amounts are estimates and payment or carrier label is created. Connect a verified carrier API and payment processor before accepting orders.</p></details>
+      </div></div><aside class="support-contact-card"><div class="support-card-mark">ES</div><span class="tiny-label">FedEx SHIPPING SUPPORT</span><h3>Have a shipment in mind?</h3><p>Include your FedEX tracking ID when you contact your operations team so they can locate the shipment quickly.</p><button class="button button-primary button-block" data-page="track">Track your package <span>→</span></button><button class="button button-outline-dark button-block" data-page="manage">Request a hold or return</button><p class="microcopy">Before launch, add your verified business phone, support email and operating address here.</p></aside></div>
+    </section>
+
+    <!-- ADMIN -->
+    <section class="page" id="page-admin" data-page-view="admin">
+      <div class="admin-topline"><div class="container"><span class="admin-lock">▣</span> FedEx SHIPPING <span class="admin-separator">/</span> OPERATIONS PORTAL <span class="admin-env">ADMIN ACCESS</span></div></div>
+      <div class="container page-body admin-page-body">
+        <div id="adminLoginView" class="admin-login-layout"><div class="admin-intro"><div class="eyebrow eyebrow-muted">OPERATIONS, IN YOUR HANDS</div><h1>One dashboard.<br><em>Every shipment.</em></h1><p>Create tracking IDs, record package milestones and review customer requests from a single workspace.</p><div class="admin-feature-list"><div><span>✓</span>Generate unique tracking IDs</div><div><span>✓</span>Record U.S. location updates</div><div><span>✓</span>Approve package holds and returns</div></div><div class="admin-demo-note"><b>Administrator sign-in</b><span>Use the credentials configured for this server.</span><small></small></div></div>
+          <div class="admin-login-card">
+            <div class="login-brand">
+              <!-- <img data-edge-logo src="assets/edge-mark.svg" alt="FedEx Shipping logo" width="42" height="42"> -->
+              <span>
+                <b>Welcome back</b>
+                <small>Sign in to manage shipment operations.</small>
+              </span>
+            </div>
+            <form id="adminLoginForm">
+              <label class="field">
+                <span class="field-caption">ADMIN EMAIL</span>
+                <input name="email" type="email" autocomplete="username" placeholder="Admin email address" required>
+              </label>
+              <label class="field">
+                <span class="field-caption">PASSWORD</span>
+                <input name="password" type="password" autocomplete="current-password" placeholder="Enter admin password" required>
+              </label>
+              <button class="button button-primary button-block" type="submit">
+                Sign in to operations <span>→</span></button>
+                <div id="adminLoginMessage" class="form-message" aria-live="polite">
+
+                </div>
+              </form>
+              <!-- <div id="adminCredentialHelp" class="admin-credential-help hidden">
+                <div><b>login</b><span>Email: <strong id="demoAdminEmail">fedex@shipping.com</strong>
+                </span>
+                <span>Password: <strong id="demoAdminPassword">Adeyemi1</strong>
+                </span>
+              </div>
+              <button id="fillDemoCredentials" class="button button-outline-dark button-small" type="button">Fill login details</button>
+            </div>
+            <p class="login-footnote">
+              <span>▣</span> Administrator-only access. Use a strong unique password in production.</p>
+            </div> -->
+          </div>
+        <div id="adminDashboardView" class="admin-dashboard hidden">
+          <div class="dashboard-heading"><div><div class="eyebrow eyebrow-muted">OPERATIONS OVERVIEW</div><h1>Good to see you.</h1><p>Track movement, manage shipment records and review customer requests.</p></div><button class="button button-outline-dark" id="adminLogoutButton">Sign out ↗</button></div>
+          <div class="admin-metrics" id="adminMetrics"><div class="metric-card"><span>Total shipments</span><b>—</b><small>All shipment records</small></div><div class="metric-card"><span>In motion</span><b>—</b><small>Active network shipments</small></div><div class="metric-card"><span>Delivered</span><b>—</b><small>Completed shipments</small></div><div class="metric-card"><span>Open requests</span><b>—</b><small>Waiting for review</small></div></div>
+          <div class="admin-tabs" role="tablist"><button class="admin-tab active" data-admin-tab="overview">Overview</button><button class="admin-tab" data-admin-tab="create">Create shipment <span>＋</span></button><button class="admin-tab" data-admin-tab="shipments">Shipments</button><button class="admin-tab" data-admin-tab="requests">Requests <span id="requestsTabCount" class="tab-count">0</span></button><button class="admin-tab" data-admin-tab="branding">Branding</button></div>
+          <div class="admin-panel active" data-admin-panel="overview"><div class="admin-panel-heading"><div><h2>Recent shipments</h2><p>Most recently updated tracking records.</p></div><button class="text-arrow" data-admin-tab="shipments">View all shipments <span>→</span></button></div><div id="overviewShipments" class="admin-table-wrap"></div><div class="admin-panel-heading requests-preview-heading"><div><h2>Needs your attention</h2><p>Pending holds, returns and quote requests.</p></div><button class="text-arrow" data-admin-tab="requests">Review requests <span>→</span></button></div><div id="overviewRequests" class="request-preview-list"></div></div>
+          <div class="admin-panel" data-admin-panel="create"><div class="admin-panel-heading"><div><h2>Create a shipment</h2><p>Generate a unique FedEx tracking ID and initial event.</p></div><span class="step-number">01</span></div><form id="createShipmentForm" class="form-grid admin-create-form">
+            <label class="field"><span class="field-caption">SENDER / BUSINESS NAME *</span><input name="senderName" required></label><label class="field"><span class="field-caption">SENDER EMAIL</span><input name="senderEmail" type="email"></label>
+            <label class="field"><span class="field-caption">RECIPIENT NAME *</span><input name="recipientName" required></label><label class="field"><span class="field-caption">RECIPIENT EMAIL</span><input name="recipientEmail" type="email"></label>
+            <label class="field field-full"><span class="field-caption">PACKAGE DESCRIPTION</span><input name="description" placeholder="e.g. boxed home goods"></label>
+            <label class="field"><span class="field-caption">ORIGIN CITY *</span><input name="originCity" placeholder="Dallas" required></label><label class="field"><span class="field-caption">ORIGIN STATE *</span><select name="originState" data-us-state required><option value="">Select a state</option></select></label>
+            <label class="field"><span class="field-caption">ORIGIN ZIP CODE *</span><input name="originZip" inputmode="numeric" pattern="[0-9]{5}(-[0-9]{4})?" title="Enter a 5-digit ZIP code or ZIP+4" maxlength="10" placeholder="75201" required></label><label class="field"><span class="field-caption">DESTINATION CITY *</span><input name="destinationCity" placeholder="Atlanta" required></label>
+            <label class="field"><span class="field-caption">DESTINATION STATE *</span><select name="destinationState" data-us-state required><option value="">Select a state</option></select></label><label class="field"><span class="field-caption">DESTINATION ZIP CODE *</span><input name="destinationZip" inputmode="numeric" pattern="[0-9]{5}(-[0-9]{4})?" title="Enter a 5-digit ZIP code or ZIP+4" maxlength="10" placeholder="30303" required></label>
+            <label class="field"><span class="field-caption">WEIGHT (LB) *</span><input name="weight" type="number" min="0.1" max="5000" step="0.1" value="1" required></label><label class="field"><span class="field-caption">SERVICE</span><select name="service"><option>FedEx Ground</option><option>FedEx Priority</option><option>FedEx Express</option></select></label>
+            <label class="field"><span class="field-caption">ESTIMATED DELIVERY DATE</span><input name="eta" type="date"></label><div class="field form-submit-cell"><span class="field-caption">STARTING STATUS</span><div class="fixed-status">Label created <span>✓</span></div></div>
+            <div class="field-full form-submit-row"><button class="button button-primary" type="submit">Generate tracking ID <span>→</span></button><span class="microcopy">A unique ID is generated by the server.</span></div>
+          </form><div id="createShipmentResult" class="quote-result" aria-live="polite"></div></div>
+          <div class="admin-panel" data-admin-panel="shipments"><div class="admin-panel-heading"><div><h2>Shipment register</h2><p>Search, inspect and add status events to tracking records.</p></div><button class="button button-primary button-small" data-admin-tab="create">＋ New shipment</button></div><div class="table-toolbar"><label class="search-field"><span>⌕</span><input id="shipmentSearch" placeholder="Search tracking ID, recipient or city" aria-label="Search shipments"></label><span id="shipmentCountLabel" class="table-count"></span></div><div id="allShipmentsTable" class="admin-table-wrap"></div><div id="statusEditor" class="status-editor hidden"><div class="status-editor-heading"><div><span class="tiny-label">SHIPMENT OPERATIONS</span><h3>Update tracking event</h3><p id="statusEditorTracking"></p></div><button id="closeStatusEditor" class="icon-button" aria-label="Close status editor">×</button></div><form id="statusUpdateForm" class="form-grid"><input type="hidden" name="trackingId"><label class="field"><span class="field-caption">NEW STATUS</span><select name="status"><option>Label created</option><option>Picked up</option><option>In transit</option><option>At facility</option><option>Out for delivery</option><option>Delivered</option><option>Held at facility</option><option>Return requested</option><option>Returning to sender</option><option>Exception</option></select></label><label class="field"><span class="field-caption">CURRENT LOCATION</span><input name="location" placeholder="e.g. Columbus, OH" required></label><label class="field field-full"><span class="field-caption">UPDATE NOTE</span><textarea name="note" rows="3" placeholder="What happened at this milestone?" required></textarea></label><div class="field-full form-submit-row"><button class="button button-primary" type="submit">Save tracking update <span>→</span></button></div></form><div id="statusUpdateMessage" class="form-message" aria-live="polite"></div></div></div>
+          <div class="admin-panel" data-admin-panel="requests"><div class="admin-panel-heading"><div><h2>Customer requests</h2><p>Review package holds, returns and quote enquiries.</p></div><span class="requests-count-badge" id="requestsCountBadge">0 pending</span></div><div id="allRequestsList" class="all-requests-list"></div></div>
+          <div class="admin-panel" data-admin-panel="branding"><div class="admin-panel-heading"><div><h2>Website branding</h2><p>Upload your official FedEx Shipping logo. The change is saved on the server and appears on the site header, footer, sign-in page and browser tab.</p></div><span class="step-number">05</span></div><div class="admin-branding-layout"><div class="admin-logo-preview-card"><span class="tiny-label">CURRENT LOGO</span><div class="admin-logo-preview"><img id="adminLogoPreview" data-edge-logo src="assets/edge-mark.svg" alt="Current FedEx Shipping logo"></div><p id="brandLogoStatus">Default FedEx Shipping logo is active.</p></div><form id="brandLogoForm" class="form-card admin-brand-form"><label class="field"><span class="field-caption">CHOOSE A LOGO IMAGE</span><input id="brandLogoFile" name="logo" type="file" accept="image/png,image/jpeg,image/webp" required></label><p class="microcopy">Use PNG, JPG or WebP, up to 750 KB. A transparent PNG works well. SVG uploads are disabled for security.</p><div class="brand-upload-preview hidden" id="brandUploadPreviewWrap"><span class="tiny-label">UPLOAD PREVIEW</span><img id="brandUploadPreview" alt="Selected logo preview"></div><div class="form-submit-row"><button class="button button-primary" type="submit">Save website logo <span>→</span></button><button class="button button-outline-dark" type="button" id="resetLogoButton">Restore default</button></div><div id="brandLogoMessage" class="form-message" aria-live="polite"></div></form></div></div>
+          <div class="admin-footnote"><span>ⓘ</span><span><b>Operational note:</b> tracking locations and status changes are entered by your team. This starter connect to carrier networks or live GPS.</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="container footer-main"><div class="footer-brand-col"><a class="brand brand-footer" href="#home" data-page="home"><span class="brand-wordmark">FedEx<span>shipping</span></span></a><p>Clear updates. Thoughtful delivery.<br>Shipping that moves you forward.</p></div><div class="footer-links"><div><b>Explore</b><button data-page="track">Track a package</button><button data-page="ship">Ship with us</button><button data-page="services">Services</button></div><div><b>Manage</b><button data-page="manage">Hold a package</button><button data-page="manage" data-footer-return="true">Return to sender</button><button data-page="support">Support & FAQs</button></div><div><b>Operations</b><button data-page="admin">Administrator portal</button><span>Domestic service across all 50 U.S. states</span><span>Independent shipping platform</span></div></div></div><div class="container footer-bottom"><span>© <span id="copyrightYear"></span> FedEx Shipping. All rights reserved.</span><span>Built for clarity at every mile.</span></div></footer>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

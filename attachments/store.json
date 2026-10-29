@@ -1,0 +1,207 @@
+{
+  "shipments": [
+    {
+      "trackingId": "EDG-US-577A5845FD",
+      "demo": false,
+      "senderName": "adeyemi",
+      "senderEmail": "donaldbranson@gmail.com",
+      "recipientName": "kayode",
+      "recipientEmail": "ayodeleadeyemi@gmail.com",
+      "description": "Boxed",
+      "weight": 2.5,
+      "service": "Edge Express",
+      "originCity": "dallas",
+      "originState": "TX",
+      "originZip": "78701",
+      "destinationCity": "San Francisco",
+      "destinationState": "CA",
+      "destinationZip": "94105",
+      "status": "Picked up",
+      "currentLocation": "dallas, TX",
+      "eta": "2026-10-31",
+      "createdAt": "2026-10-29T10:21:27.653Z",
+      "updatedAt": "2026-10-29T10:49:59.902Z",
+      "events": [
+        {
+          "id": "EV-A4F0233AAF",
+          "status": "Label created",
+          "location": "dallas, TX",
+          "note": "Shipment created by Edge Shipping operations.",
+          "timestamp": "2026-10-29T10:21:27.653Z"
+        },
+        {
+          "id": "EV-C9F2598A5B",
+          "status": "Held at facility",
+          "location": "dallas, TX",
+          "note": "not cleared",
+          "timestamp": "2026-10-29T10:24:14.611Z"
+        },
+        {
+          "id": "EV-7B59E26A90",
+          "status": "Picked up",
+          "location": "dallas, TX",
+          "note": "package picked up",
+          "timestamp": "2026-10-29T10:49:59.905Z"
+        }
+      ]
+    },
+    {
+      "trackingId": "EDG-US-DEMO001",
+      "demo": true,
+      "senderName": "Northstar Goods",
+      "senderEmail": "shipping@example.com",
+      "recipientName": "Jordan Lee",
+      "recipientEmail": "",
+      "description": "Business parcel",
+      "weight": 4.2,
+      "service": "Edge Priority",
+      "originCity": "Dallas",
+      "originState": "TX",
+      "originZip": "75201",
+      "destinationCity": "Atlanta",
+      "destinationState": "GA",
+      "destinationZip": "30303",
+      "status": "In transit",
+      "currentLocation": "Memphis, TN",
+      "eta": "2026-10-30",
+      "createdAt": "2026-10-27T20:14:35.636Z",
+      "updatedAt": "2026-10-29T08:14:35.636Z",
+      "events": [
+        {
+          "id": "EV-DEMO-1",
+          "status": "Label created",
+          "location": "Dallas, TX",
+          "note": "Shipment information received.",
+          "timestamp": "2026-10-27T20:14:35.636Z"
+        },
+        {
+          "id": "EV-DEMO-2",
+          "status": "Picked up",
+          "location": "Dallas, TX",
+          "note": "Package picked up by Edge Shipping.",
+          "timestamp": "2026-10-28T03:14:35.636Z"
+        },
+        {
+          "id": "EV-DEMO-3",
+          "status": "At facility",
+          "location": "Dallas, TX Distribution Center",
+          "note": "Processed at origin facility.",
+          "timestamp": "2026-10-28T10:14:35.636Z"
+        },
+        {
+          "id": "EV-DEMO-4",
+          "status": "In transit",
+          "location": "Memphis, TN",
+          "note": "Package moving through the network.",
+          "timestamp": "2026-10-29T08:14:35.636Z"
+        }
+      ]
+    },
+    {
+      "trackingId": "EDG-US-DEMO002",
+      "demo": true,
+      "senderName": "Sample Outdoor Co.",
+      "senderEmail": "",
+      "recipientName": "Casey Morgan",
+      "recipientEmail": "",
+      "description": "Retail package",
+      "weight": 1.6,
+      "service": "Edge Express",
+      "originCity": "Cleveland",
+      "originState": "OH",
+      "originZip": "44113",
+      "destinationCity": "Chicago",
+      "destinationState": "IL",
+      "destinationZip": "60601",
+      "status": "Out for delivery",
+      "currentLocation": "Chicago, IL",
+      "eta": "2026-10-29",
+      "createdAt": "2026-10-28T04:14:35.636Z",
+      "updatedAt": "2026-10-29T09:14:35.636Z",
+      "events": [
+        {
+          "id": "EV-DEMO-5",
+          "status": "Label created",
+          "location": "Cleveland, OH",
+          "note": "Shipment information received.",
+          "timestamp": "2026-10-28T04:14:35.636Z"
+        },
+        {
+          "id": "EV-DEMO-6",
+          "status": "Picked up",
+          "location": "Cleveland, OH",
+          "note": "Package picked up.",
+          "timestamp": "2026-10-28T10:14:35.636Z"
+        },
+        {
+          "id": "EV-DEMO-7",
+          "status": "In transit",
+          "location": "Chicago, IL",
+          "note": "Arrived at destination metro area.",
+          "timestamp": "2026-10-29T02:14:35.636Z"
+        },
+        {
+          "id": "EV-DEMO-8",
+          "status": "Out for delivery",
+          "location": "Chicago, IL",
+          "note": "Your package is with a local delivery driver.",
+          "timestamp": "2026-10-29T09:14:35.636Z"
+        }
+      ]
+    },
+    {
+      "trackingId": "EDG-US-DEMO003",
+      "demo": true,
+      "senderName": "Sample Home Supply",
+      "senderEmail": "",
+      "recipientName": "Riley Taylor",
+      "recipientEmail": "",
+      "description": "Home accessories",
+      "weight": 3,
+      "service": "Edge Ground",
+      "originCity": "Phoenix",
+      "originState": "AZ",
+      "originZip": "85004",
+      "destinationCity": "Los Angeles",
+      "destinationState": "CA",
+      "destinationZip": "90012",
+      "status": "Delivered",
+      "currentLocation": "Los Angeles, CA",
+      "eta": "2026-10-28",
+      "createdAt": "2026-10-25T16:14:35.636Z",
+      "updatedAt": "2026-10-28T08:14:35.636Z",
+      "events": [
+        {
+          "id": "EV-DEMO-9",
+          "status": "Label created",
+          "location": "Phoenix, AZ",
+          "note": "Shipment information received.",
+          "timestamp": "2026-10-25T16:14:35.636Z"
+        },
+        {
+          "id": "EV-DEMO-10",
+          "status": "Picked up",
+          "location": "Phoenix, AZ",
+          "note": "Package picked up.",
+          "timestamp": "2026-10-26T04:14:35.636Z"
+        },
+        {
+          "id": "EV-DEMO-11",
+          "status": "In transit",
+          "location": "Los Angeles, CA",
+          "note": "Package moving through the network.",
+          "timestamp": "2026-10-27T06:14:35.636Z"
+        },
+        {
+          "id": "EV-DEMO-12",
+          "status": "Delivered",
+          "location": "Los Angeles, CA",
+          "note": "Delivered to the destination address. Demo record only.",
+          "timestamp": "2026-10-28T08:14:35.636Z"
+        }
+      ]
+    }
+  ],
+  "requests": [],
+  "brandLogo": null
+}
